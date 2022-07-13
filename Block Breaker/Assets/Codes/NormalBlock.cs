@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NormalBlock : MonoBehaviour
 {
     
-    AudioSource audio;
+   // AudioSource audio;
+    public UnityEvent OnCollisionEvent;
     
       private void Start() {
-        audio = GetComponent<AudioSource>();
+        //audio = GetComponent<AudioSource>();
     }
 
     void OnCollisionEnter(Collision coll)
@@ -18,7 +20,8 @@ public class NormalBlock : MonoBehaviour
             Destroy(gameObject);
              
         }
-        audio.Play();
+        OnCollisionEvent?.Invoke();
+        //audio.Play();
     }
    
 }
