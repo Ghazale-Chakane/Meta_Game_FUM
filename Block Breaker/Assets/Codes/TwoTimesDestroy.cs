@@ -1,11 +1,14 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TwoTimesDestroy : MonoBehaviour
 {
     private bool breaker = false;
-     AudioSource audio;
+    AudioSource audio;
+    public UnityEvent OnCollisionEvent;
+    public CameraShake CameraShake;
     
-      private void Start() {
+    private void Start() {
         audio = GetComponent<AudioSource>();
     }
     void OnCollisionEnter(Collision coll)
@@ -18,9 +21,11 @@ public class TwoTimesDestroy : MonoBehaviour
             }
             else
             {
+                OnCollisionEvent?.Invoke();
                 Destroy(gameObject);
             }
         }
         audio.Play();
+        StartCoroutine(CameraShake.shake(.15f, .4f));
     }
 }

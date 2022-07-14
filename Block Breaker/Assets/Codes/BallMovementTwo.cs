@@ -8,13 +8,17 @@ public class BallMovementTwo : MonoBehaviour
     public UnityEvent OnCollisionEvent;
     void Start()
     {
-        rb.AddForce(-250, 0, -500);
+        rb.AddForce(-300, 0, -500);
     }
-      private void Update() {
-          Vector3 v = GetComponent<Rigidbody>().velocity;
-           v = v.normalized;
-           v *= speed;
-           GetComponent<Rigidbody>().velocity = v;
+    private void Update() {
+        Vector3 v = GetComponent<Rigidbody>().velocity;
+        v = v.normalized;
+        v *= speed;
+        GetComponent<Rigidbody>().velocity = v;
+        if(transform.position.x >= 16)
+        {
+            Destroy(gameObject);
+        }
     }
     private void OnCollisionEnter(Collision other) {
         OnCollisionEvent?.Invoke();

@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class NormalBlock : MonoBehaviour
 {
     
-   // AudioSource audio;
     public UnityEvent OnCollisionEvent;
+    public CameraShake CameraShake;
     
       private void Start() {
         //audio = GetComponent<AudioSource>();
@@ -17,10 +17,12 @@ public class NormalBlock : MonoBehaviour
     {
         if(coll.collider.tag == "Ball")
         {
+            OnCollisionEvent?.Invoke();
+            StartCoroutine(CameraShake.shake(.15f, .4f));
             Destroy(gameObject);
              
         }
-        OnCollisionEvent?.Invoke();
+        
         //audio.Play();
     }
    
